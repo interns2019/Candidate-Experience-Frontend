@@ -12,12 +12,14 @@ export class CandidateFeedbackComponent implements OnInit {
   question: Array<number>;
   value: Array<string>;
   cookieService: CookieService;
+  comment: string;
 
   constructor(){
     this.title = 'TIAA CANDIDATE FEEDBACK';
     this.question = new Array(8).fill(null);
     this.value = new Array(8).fill('?');
     this.cookieService = new CookieService();  
+    // this.comment = "none yet"
   }
   
   setScore(a,b) {
