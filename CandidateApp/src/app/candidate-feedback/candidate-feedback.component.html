@@ -1,11 +1,14 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  </div>
-<div style="text-align:center">
-<h3>RATING: 1-7: Average, 8-9: Satisfactory, 10: Excellent</h3>
+
+
+<div class="box">
+    <div class= "box1" >
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/TIAA_logo_%282016%29.svg/1920px-TIAA_logo_%282016%29.svg.png" class="logo">
+  <h1 style="padding-top:5px;">
+    Welcome to {{ title }}!</h1>
+     <h3>RATING: 1-7: Average, 8-9: Satisfactory, 10: Excellent</h3>
 </div>
+    
+ <div class="box2"> 
 <h3>QUESTION 1</h3>
 <p>Your Rating is {{question[1]}} {{value[1]}}</p>
   <button (click)="setScore(1,1)">1</button>
@@ -23,7 +26,8 @@
     <button (click)="setScore(2,4)">4</button>
     <button (click)="setScore(2,8)">8</button>
     <button (click)="setScore(2,10)">10</button>
-
+</div>
+<div class="box3">    
 <h3>QUESTION 3</h3>
   <p>Your Rating is {{question[3]}} {{value[3]}}</p>
     <button (click)="setScore(3,1)">1</button>
@@ -41,5 +45,10 @@
       <button (click)="setScore(4,4)">4</button>
       <button (click)="setScore(4,8)">8</button>
       <button (click)="setScore(4,10)">10</button> 
-
-<br><br><textarea name="comment" class="textboxclass" [(ngModel)]="comment" placeholder="comment"></textarea>
+</div >
+    
+<br><br><textarea style=" position: absolute;
+    left: calc(50% - 250px);
+	top:calc(50% + 175px);"  name="comment" class="textboxclass" [(ngModel)]="comment" placeholder="comment"></textarea>
+    
+</div>
