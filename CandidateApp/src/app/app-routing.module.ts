@@ -6,7 +6,8 @@ import { CandidateFeedbackComponent } from './candidate-feedback/candidate-feedb
 const routes: Routes = 
 [{ path: 'login', component: CandidateLoginComponent },
 {  path: 'feedback', component: CandidateFeedbackComponent},
-{path: '', redirectTo: 'login', pathMatch: 'full' }];
+{path: '', redirectTo: 'login', pathMatch: 'full' } //redirecting
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

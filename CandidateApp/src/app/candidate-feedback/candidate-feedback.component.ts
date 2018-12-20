@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {CookieService} from 'angular2-cookie/core';
+import {CookieService} from 'angular2-cookie/core'; // for cookies
+import { HttpClient } from '@angular/common/http'; // for http request 
 
 @Component({
   selector: 'app-candidate-feedback',
   templateUrl: './candidate-feedback.component.html',
   styleUrls: ['./candidate-feedback.component.scss']
 })
-export class CandidateFeedbackComponent implements OnInit {
+export class CandidateFeedbackComponent implements OnInit{
 
   title : string;
   question: Array<number>;
   value: Array<string>;
   cookieService: CookieService;
   comment: string;
+  readonly URL =  'http://localhost:4000/';
 
-  constructor(){
+  constructor(private http : HttpClient){
     this.title = 'TIAA CANDIDATE FEEDBACK';
     this.question = new Array(8).fill(null);
     this.value = new Array(8).fill('?');
     this.cookieService = new CookieService();  
-    // this.comment = "none yet"
   }
   
   setScore(a,b) {
@@ -42,7 +43,9 @@ export class CandidateFeedbackComponent implements OnInit {
     this.cookieService.put('test','testingCookie');
   }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    
   }
 
 }
