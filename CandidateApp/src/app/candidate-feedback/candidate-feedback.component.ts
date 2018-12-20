@@ -16,7 +16,7 @@ export class CandidateFeedbackComponent implements OnInit{
   comment: string;
   readonly URL =  'http://localhost:4000/';
 
-  constructor(private http : HttpClient){
+  constructor(private httpClient : HttpClient){
     this.title = 'TIAA CANDIDATE FEEDBACK';
     this.question = new Array(8).fill(null);
     this.value = new Array(8).fill('?');
@@ -45,7 +45,18 @@ export class CandidateFeedbackComponent implements OnInit{
 
   ngOnInit()
   {
-    
+    this.httpClient.post(this.URL,
+    {
+      data: this.question
+    })
+    .subscribe(
+        data => {
+            console.log("POST Request is successful ", data);
+        },
+        error => {
+            console.log("Error", error);
+        }
+    ); 
   }
 
 }
