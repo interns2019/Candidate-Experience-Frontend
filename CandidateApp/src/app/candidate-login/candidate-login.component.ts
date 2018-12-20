@@ -18,10 +18,11 @@ export class CandidateLoginComponent implements OnInit {
   
 
   ngOnInit() {
-    this.http.get(this.URL).subscribe(data => {
-      console.log(data[0]);
-    }
-    );
+    
   }
-
+  // code for ge requests
+  // this.http.get(this.URL).subscribe(data => {
+  //   console.log(data[0]);
+  // }
+  // );
 }
