@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class CandidateLoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {document.body.style.background = 'rgba(4,89,152,0.25)'; }
   
   goToPage(pageName:string){
     this.router.navigate([`${pageName}`]);
