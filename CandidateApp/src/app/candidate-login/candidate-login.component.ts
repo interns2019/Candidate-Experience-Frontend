@@ -7,9 +7,11 @@ import { HttpClient } from '@angular/common/http'; // for http request
   styleUrls: ['./candidate-login.component.scss']
 })
 export class CandidateLoginComponent implements OnInit {
+
   readonly URL =  'http://localhost:4000/';
-  constructor(private router: Router, private http: HttpClient) { }
-  
+  constructor(private router: Router, private http: HttpClient) { document.body.style.background = 'rgba(4,89,152,0.25)';}
+
+
   goToPage(pageName:string){
     this.router.navigate([`${pageName}`]);
   }
