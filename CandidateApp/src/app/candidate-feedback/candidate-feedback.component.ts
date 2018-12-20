@@ -20,6 +20,7 @@ export class CandidateFeedbackComponent implements OnInit {
     this.value = new Array(8).fill('?');
     this.cookieService = new CookieService();  
     // this.comment = "none yet"
+    document.body.style.background = 'rgba(4,89,152,0.25)';
   }
   
   setScore(a,b) {
