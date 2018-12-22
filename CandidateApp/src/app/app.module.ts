@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http'; // for http request
     BrowserModule,
     AppRoutingModule,
     FormsModule, // for tow way data binding
-    HttpClientModule // for http request 
+    HttpClientModule // for http request
   ],
   providers: [CookieService], // for cookies
   bootstrap: [AppComponent]

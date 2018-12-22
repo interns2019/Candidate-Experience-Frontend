@@ -14,7 +14,7 @@ export class CandidateFeedbackComponent implements OnInit{
   value: Array<string>;
   cookieService: CookieService;
   feedback: string;
-  readonly URL =  'http://localhost:4000/';
+  readonly URL =  'http://192.168.43.54:8080/';
   readonly pageName = 'feedback'
 
   constructor(private httpClient : HttpClient){
@@ -49,8 +49,9 @@ export class CandidateFeedbackComponent implements OnInit{
       this.httpClient.post(this.URL+this.pageName,
       {
         refId: 'A11345',
-        feedback:this.feedback,
-        question: this.question
+        candidateName: 'Anurag Ghosh',
+        candidateCompanyName: 'Jp Morgan',
+        feedback:this.feedback
       })
       .subscribe(
           data => {
