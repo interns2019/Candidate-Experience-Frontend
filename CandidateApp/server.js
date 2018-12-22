@@ -19,13 +19,19 @@ var server =app.listen("4000",function(err){
 var a = {
     Success: true
 }
-app.get("/",function(req,res){
+app.get("/feedback",function(req,res){
     res.writeHead("200",{ "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
     res.end(JSON.stringify(a))// important stuff
 })
 
-app.post('/',function(req,res){
-    console.log(req.body.data)
+app.post('/feedback',function(req,res){
+    console.log(req.body)
+    res.writeHead("200",{ "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+    res.end(JSON.stringify(a))
+})
+
+app.post('/login',function(req,res){
+    console.log(req.body)
     res.writeHead("200",{ "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
     res.end(JSON.stringify(a))
 })

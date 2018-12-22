@@ -13,8 +13,9 @@ export class CandidateFeedbackComponent implements OnInit{
   question: Array<number>;
   value: Array<string>;
   cookieService: CookieService;
-  comment: string;
+  feedback: string;
   readonly URL =  'http://localhost:4000/';
+  readonly pageName = 'feedback'
 
   constructor(private httpClient : HttpClient){
     this.title = 'TIAA CANDIDATE FEEDBACK';
@@ -43,20 +44,27 @@ export class CandidateFeedbackComponent implements OnInit{
     this.cookieService.put('test','testingCookie');
   }
 
+  submitFeedback()
+  {
+      this.httpClient.post(this.URL+this.pageName,
+      {
+        refId: 'A11345',
+        feedback:this.feedback,
+        question: this.question
+      })
+      .subscribe(
+          data => {
+              console.log("POST Request is successful ", data);
+          },
+          error => {
+              console.log("Error", error);
+          }
+      ); 
+  }
+
   ngOnInit()
   {
-    this.httpClient.post(this.URL,
-    {
-      data: this.question
-    })
-    .subscribe(
-        data => {
-            console.log("POST Request is successful ", data);
-        },
-        error => {
-            console.log("Error", error);
-        }
-    ); 
+    
   }
 
 }

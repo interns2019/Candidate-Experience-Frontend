@@ -4,9 +4,9 @@
 <h1>Candidate Login</h1>
 <form>
 <p>Reference ID:</p>
-<input type="text" name="" placeholder="Enter Reference ID">
+<input type="text" name="" placeholder="Enter Reference ID" [(ngModel)]="refId" [ngModelOptions]="{standalone: true}">
 <p>Password:</p>
-<input type="password" name="" placeholder="Enter Password">
+<input type="password" name="" placeholder="Enter Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
     <button (click)="goToPage('feedback')">
   <span>Submit</span>
 </button>
