@@ -36,7 +36,7 @@ export class CandidateLoginComponent implements OnInit {
               this.router.navigate([`${pageName}`]);
           },
           error => {
-              console.log("Error", error);
+              console.log("Error has occured", error);
           }
       ); 
   }
