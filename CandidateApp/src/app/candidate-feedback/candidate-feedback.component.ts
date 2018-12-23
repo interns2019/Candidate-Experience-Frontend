@@ -1,41 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import {CookieService} from 'angular2-cookie/core'; // for cookies
 import { HttpClient } from '@angular/common/http'; // for http request 
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-candidate-feedback',
   templateUrl: './candidate-feedback.component.html',
   styleUrls: ['./candidate-feedback.component.scss']
 })
+
+
+
 export class CandidateFeedbackComponent implements OnInit{
 
   title : string;
-  question: Array<number>;
-  value: Array<string>;
   cookieService: CookieService;
+  questionList: Array<any>;
   feedback: string;
-  readonly URL =  'http://192.168.43.54:8080/';
+  readonly URL =  'http://localhost:8080/';
   readonly pageName = 'feedback'
 
-  constructor(private httpClient : HttpClient){
+  constructor(private httpClient : HttpClient, private g: Globals){
     this.title = 'TIAA CANDIDATE FEEDBACK';
-    this.question = new Array(8).fill(null);
-    this.value = new Array(8).fill('?');
     this.cookieService = new CookieService();  
+    this.questionList = new Array();
   }
   
   setScore(a,b) {
-    this.question[a] = b;
+    this.questionList[a].questionRating = b;
     if(b<8)
     {
-      this.value[a] = 'Average'
+      this.questionList[a].questionOverAll = 'Average'
     }
     else if(b<10)
     {
-      this.value[a] = 'Satisfactory'
+      this.questionList[a].questionOverAll = 'Satisfactory'
     }
     else{
-      this.value[a] = 'Excellent'
+      this.questionList[a].questionOverAll = 'Excellent'
     }
   }
 
@@ -46,12 +48,11 @@ export class CandidateFeedbackComponent implements OnInit{
 
   submitFeedback()
   {
-      this.httpClient.post(this.URL+this.pageName,
+      this.httpClient.post(this.g.url+this.pageName,
       {
-        refId: 'A11345',
-        candidateName: 'Anurag Ghosh',
         candidateCompanyName: 'Jp Morgan',
-        feedback:this.feedback
+        feedback:this.feedback,
+        questionList: this.questionList
       })
       .subscribe(
           data => {
@@ -65,7 +66,10 @@ export class CandidateFeedbackComponent implements OnInit{
 
   ngOnInit()
   {
-    
+    for(let i =0; i< 5;i++)
+    {
+      this.questionList.push({questionNo: 'Q'+i, questionName: 'How was the food?', questionOverAll:'?', questionRating: null})
+    }
   }
 
 }

@@ -14,7 +14,7 @@ import {CookieService} from 'angular2-cookie/core'; // for cookies
 
 export class CandidateLoginComponent implements OnInit {
 
-  readonly URL =  'http://localhost:4000/';
+  readonly URL =  'http://localhost:8080/';
   readonly pageName = 'login';
   refId : string;
   password : string;

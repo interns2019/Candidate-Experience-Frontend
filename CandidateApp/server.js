@@ -8,12 +8,12 @@ app.use(bodyParser.json())
 
 app.use(cors());
 
-var server =app.listen("4000",function(err){
+var server =app.listen("8080",function(err){
     if(err){
       throw err
     }
     else{
-      console.log('Listening to port 4000')
+      console.log('Listening to port 8080')
     }
 })
 var a = {

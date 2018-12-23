@@ -8,6 +8,7 @@ import { CandidateLoginComponent } from './candidate-login/candidate-login.compo
 import { CandidateFeedbackComponent } from './candidate-feedback/candidate-feedback.component';
 import { FormsModule } from '@angular/forms'; // for tow way data binding
 import { HttpClientModule } from '@angular/common/http'; // for http request 
+import { Globals } from './globals' // global variables
 
 @NgModule({
   declarations: [
@@ -21,7 +22,10 @@ import { HttpClientModule } from '@angular/common/http'; // for http request
     FormsModule, // for tow way data binding
     HttpClientModule // for http request
   ],
-  providers: [CookieService], // for cookies
+  providers: [
+    CookieService,
+    Globals
+  ], // for cookies
   bootstrap: [AppComponent]
 })
 export class AppModule { }
