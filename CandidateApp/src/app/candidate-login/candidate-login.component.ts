@@ -15,10 +15,9 @@ import { Globals } from '../globals';
 
 export class CandidateLoginComponent implements OnInit {
 
-  readonly URL =  'http://localhost:8080/';
   readonly pageName = 'login';
-  refId : string;
   password : string;
+  refId : string;
   
   constructor(private router: Router, private httpClient: HttpClient, private g: Globals) {
      document.body.style.background = 'rgba(4,89,152,0.25)';

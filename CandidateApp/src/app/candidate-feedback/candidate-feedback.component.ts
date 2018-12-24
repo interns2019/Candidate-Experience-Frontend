@@ -17,7 +17,6 @@ export class CandidateFeedbackComponent implements OnInit{
   cookieService: CookieService;
   questionList: Array<any>;
   feedback: string;
-  readonly URL =  'http://localhost:8080/';
   readonly pageName = 'feedback'
 
   constructor(private httpClient : HttpClient, private g: Globals){
