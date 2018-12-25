@@ -20,6 +20,7 @@ export class CandidateFeedbackComponent implements OnInit{
   readonly pageName = 'feedback'
 
   constructor(private httpClient : HttpClient, private g: Globals){
+    document.body.style.background = 'rgba(4,89,152,0.25)';
     this.title = 'TIAA CANDIDATE FEEDBACK';
     this.cookieService = new CookieService();  
     this.questionList = new Array();

@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidateAnalysisComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    document.body.style.background = 'rgba(4,89,152,0.25)';
+  }
 
   ngOnInit() {
   }
