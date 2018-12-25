@@ -8,13 +8,17 @@ import { CandidateLoginComponent } from './candidate-login/candidate-login.compo
 import { CandidateFeedbackComponent } from './candidate-feedback/candidate-feedback.component';
 import { FormsModule } from '@angular/forms'; // for tow way data binding
 import { HttpClientModule } from '@angular/common/http'; // for http request 
-import { Globals } from './globals' // global variables
+import { Globals } from './globals';
+import { CandidateAnalysisComponent } from './candidate-analysis/candidate-analysis.component';
+import { HrLoginComponent } from './hr-login/hr-login.component' // global variables
 
 @NgModule({
   declarations: [
     AppComponent,
     CandidateLoginComponent,
-    CandidateFeedbackComponent
+    CandidateFeedbackComponent,
+    CandidateAnalysisComponent,
+    HrLoginComponent
   ],
   imports: [
     BrowserModule,
