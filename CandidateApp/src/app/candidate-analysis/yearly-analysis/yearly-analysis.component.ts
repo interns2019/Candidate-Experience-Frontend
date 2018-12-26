@@ -15,10 +15,11 @@ export class YearlyAnalysisComponent implements OnInit {
     this.BarChart=new Chart ('barchart', {
       type: 'bar',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["2018", "2019", "2020", "2021"], //yeh dynamically [2018 to current_year] lena padega:
+                                              // assuming ki hamara feed backack system 2018 se data collect karna start kiya
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          data: [10, 2, 7, 5],
           backgroundColor: [
             'rgba(255, 99, 132, 0.45)',
             'rgba(54, 162, 235, 0.45)',
