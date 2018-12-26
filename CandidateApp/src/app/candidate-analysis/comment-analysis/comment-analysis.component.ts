@@ -25,7 +25,7 @@ export class CommentAnalysisComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Polarity of Positive and Negative Feedback Comments'
+          text: 'Sentiment Analysis of Feedback Comments'
         }
       }
     });
