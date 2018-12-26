@@ -12,7 +12,7 @@ export class CommentAnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.BarChart=new Chart ('piechart', {
+    this.PieChart=new Chart ('piechart', {
       type: 'pie',
       data: {
         labels: ["Positive Comments", "Negative Comments"],
