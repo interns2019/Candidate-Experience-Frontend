@@ -9,7 +9,8 @@ import { Globals } from '../../globals';
   styleUrls: ['./yearly-analysis.component.scss']
 })
 export class YearlyAnalysisComponent implements OnInit {
-  BarChart=[];
+  BarChart;
+  analysis;
   questionList: Array<any>;
 
   constructor(private httpClient : HttpClient, private g : Globals) {
@@ -17,32 +18,37 @@ export class YearlyAnalysisComponent implements OnInit {
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
 
-  drawGraph()
+  drawGraph(questionNo)
+  {
+    var year = 2019;
+    this.reinitalizeGraph()
+        while(this.analysis[''+year]!==undefined)
+        {
+          this.BarChart.data.labels.unshift(''+year)
+          this.BarChart.data.datasets[0].data.unshift(this.analysis[''+year][''+questionNo])
+          var r1 = Math.round(Math.random()*255) 
+          var r2 = Math.round(Math.random()*255)
+          var r3 = Math.round(Math.random()*255)
+          this.BarChart.data.datasets[0].backgroundColor.push('rgba('+r1+', '+r2+', '+r3+', 0.45)')
+          this.BarChart.data.datasets[0].borderColor.push('rgba('+r1+', '+r2+', '+r3+', 1)')
+          year -= 1;
+        }
+        this.BarChart.update()
+  }
+ 
+
+  reinitalizeGraph()
   {
     this.BarChart=new Chart ('barchart', {
       type: 'bar',
       data: {
-        labels: ["2018", "2019", "2020", "2021"], //yeh dynamically [2018 to current_year] lena padega:
+        labels: [], //yeh dynamically [2018 to current_year] lena padega:
                                               // assuming ki hamara feed backack system 2018 se data collect karna start kiya
         datasets: [{
           label: '# of Votes',
-          data: [3,4,6,4],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.45)',
-            'rgba(54, 162, 235, 0.45)',
-            'rgba(255, 206, 86, 0.45)',
-            'rgba(75, 192, 192, 0.45)',
-            'rgba(153, 102, 255, 0.45)',
-            'rgba(255, 159, 64, 0.45)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
+          data: [],
+          backgroundColor: [],
+          borderColor: [],
           borderWidth: 2
         }]
       },
@@ -59,56 +65,27 @@ export class YearlyAnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
+        
+    this.reinitalizeGraph()
+    var num = new Number(266);
+    this.httpClient.get(this.g.url+'feedback/yearly').subscribe(data => {
+        this.analysis = data
+    },
+    error => {
+        console.log("Error", error);
+    }
+   );
+
     this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
-      for(let i =0; i< 4;i++)
+      for(let i =0; i< data["length"];i++)
       {
-        this.questionList.push({questionNo: 'Q'+(i+1), questionName: data[i].questionName})
+        this.questionList.push({questionNo: (i+1), questionName: data[i].questionName})
       }
     },
     error => {
         console.log("Error", error);
     }
    );
- 
-
-    this.BarChart=new Chart ('barchart', {
-      type: 'bar',
-      data: {
-        labels: ["2018", "2019", "2020", "2021"], //yeh dynamically [2018 to current_year] lena padega:
-                                              // assuming ki hamara feed backack system 2018 se data collect karna start kiya
-        datasets: [{
-          label: '# of Votes',
-          data: [0,0,0,0],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.45)',
-            'rgba(54, 162, 235, 0.45)',
-            'rgba(255, 206, 86, 0.45)',
-            'rgba(75, 192, 192, 0.45)',
-            'rgba(153, 102, 255, 0.45)',
-            'rgba(255, 159, 64, 0.45)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 2
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
-            }
-          }]
-        }
-      }
-    });
   }
 
 }
-

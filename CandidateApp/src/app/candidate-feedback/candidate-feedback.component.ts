@@ -67,7 +67,7 @@ export class CandidateFeedbackComponent implements OnInit {
       data => {
         console.log(data);
 
-        for (let i = 0; i < this.g.length; i++) {
+        for (let i = 0; i < data["length"]; i++) {
           this.questionList.push({
             questionNo: (i + 1),
             questionName: data[i].questionName,

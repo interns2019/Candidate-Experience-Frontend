@@ -23,7 +23,7 @@
           <h4>Select Question to analyze:</h4>
           <div *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
            
-            <li (click)="drawGraph()">{{question.questionNo}}: {{question.questionName}}</li>
+            <li (click)="drawGraph(question.questionNo)">{{question.questionNo}}: {{question.questionName}}</li>
           </div>  
            </td>
   </tr>

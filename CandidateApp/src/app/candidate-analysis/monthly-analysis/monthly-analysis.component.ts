@@ -9,7 +9,8 @@ import { Globals } from '../../globals';
   styleUrls: ['./monthly-analysis.component.scss']
 })
 export class MonthlyAnalysisComponent implements OnInit {
-  BarChart=[]; 
+  BarChart; 
+  analysis;
   questionList: Array<any>;
 
   constructor(private httpClient : HttpClient, private g : Globals) {
@@ -17,7 +18,22 @@ export class MonthlyAnalysisComponent implements OnInit {
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
 
-  drawGraph()
+  drawGraph(questionNo)
+  {
+    this.reinitializeGraph()
+    for(let i =1 ;i <= 12; i++)
+    {
+          this.BarChart.data.datasets[0].data.push(this.analysis[''+i][''+questionNo])
+          var r1 = Math.round(Math.random()*255) 
+          var r2 = Math.round(Math.random()*255)
+          var r3 = Math.round(Math.random()*255)
+          this.BarChart.data.datasets[0].backgroundColor.push('rgba('+r1+', '+r2+', '+r3+', 0.45)')
+          this.BarChart.data.datasets[0].borderColor.push('rgba('+r1+', '+r2+', '+r3+', 1)')
+    }
+    this.BarChart.update()
+  }
+
+  reinitializeGraph()
   {
     this.BarChart=new Chart ('barchart', {
       type: 'bar',
@@ -25,97 +41,9 @@ export class MonthlyAnalysisComponent implements OnInit {
         labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sept","Oct","Nov","Dec"],
         datasets: [{
           label: '# of Votes',
-          data: [1, 5, 3, 5, 2, 3,7, 9, 3, 5, 10, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.45)',
-            'rgba(54, 162, 235, 0.45)',
-            'rgba(255, 206, 86, 0.45)',
-            'rgba(75, 192, 192, 0.45)',
-            'rgba(153, 102, 255, 0.45)',
-            'rgba(255, 159, 64, 0.45)',
-            'rgba(255, 99, 132, 0.45)',
-            'rgba(54, 162, 235, 0.45)',
-            'rgba(255, 206, 86, 0.45)',
-            'rgba(75, 192, 192, 0.45)',
-            'rgba(153, 102, 255, 0.45)',
-            'rgba(255, 159, 64, 0.45)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 2
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
-            }
-          }]
-        }
-      }
-    }); 
-  }
-
-  ngOnInit() {
-    this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
-      for(let i =0; i< 4;i++)
-      {
-        this.questionList.push({questionNo: 'Q'+(i+1), questionName: data[i].questionName})
-      }
-    },
-    error => {
-        console.log("Error", error);
-    }
-   );
-
-    this.BarChart=new Chart ('barchart', {
-      type: 'bar',
-      data: {
-        labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sept","Oct","Nov","Dec"],
-        datasets: [{
-          label: '# of Votes',
-          data: [0,0,0,0,0,0,0,0,0,0,0,0],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.45)',
-            'rgba(54, 162, 235, 0.45)',
-            'rgba(255, 206, 86, 0.45)',
-            'rgba(75, 192, 192, 0.45)',
-            'rgba(153, 102, 255, 0.45)',
-            'rgba(255, 159, 64, 0.45)',
-            'rgba(255, 99, 132, 0.45)',
-            'rgba(54, 162, 235, 0.45)',
-            'rgba(255, 206, 86, 0.45)',
-            'rgba(75, 192, 192, 0.45)',
-            'rgba(153, 102, 255, 0.45)',
-            'rgba(255, 159, 64, 0.45)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
+          data: [],
+          backgroundColor: [],
+          borderColor: [],
           borderWidth: 2
         }]
       },
@@ -131,4 +59,26 @@ export class MonthlyAnalysisComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    this.reinitializeGraph()
+    this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
+      for(let i =0; i< data["length"];i++)
+      {
+        this.questionList.push({questionNo: (i+1), questionName: data[i].questionName})
+      }
+    },
+    error => {
+        console.log("Error", error);
+    }
+   );
+  
+   this.httpClient.get(this.g.url+'feedback/monthly').subscribe(data => {
+    this.analysis = data
+  },
+  error => {
+      console.log("Error", error);
+  }
+ );
+  
+  }  
 }
