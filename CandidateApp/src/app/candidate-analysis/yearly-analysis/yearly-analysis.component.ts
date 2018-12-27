@@ -60,7 +60,7 @@ export class YearlyAnalysisComponent implements OnInit {
 
   ngOnInit() {
     this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
-      for(let i =0; i< 4;i++)
+      for(let i =0; i< this.g.length;i++)
       {
         this.questionList.push({questionNo: 'Q'+(i+1), questionName: data[i].questionName})
       }

@@ -1,27 +1,43 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  </div>
-<div style="text-align:center">
-<h3>RATING: 1-7: Average, 8-9: Satisfactory, 10: Excellent</h3>
+
+
+
+<!--heading-->
+<div class="jumbotron">
+<div style="text-align:center; padding-right:50px">
+  <h2><mark style="background: rgba(0,0,0,0.75);color: white;">
+    Welcome to {{ title }}!</mark>
+  </h2>
+  <p><mark style="background: rgba(0,0,0,0.75);color: white;">RATING: 1-7: Average, 8-9: Satisfactory, 10: Excellent</mark></p>
 </div>
-<div *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
-<h3>{{question.questionNo}}: {{question.questionName}}</h3>
-<p>Your Rating is {{question.questionRating}} {{question.questionOverAll}}</p>
-  <button (click)="setScore(i,1)">1</button>
-  <button (click)="setScore(i,2)">2</button>
-  <button (click)="setScore(i,3)">3</button>
-  <button (click)="setScore(i,4)">4</button>
-  <button (click)="setScore(i,5)">4</button>
-  <button (click)="setScore(i,6)">6</button>
-  <button (click)="setScore(i,7)">7</button>
-  <button (click)="setScore(i,8)">8</button>
-  <button (click)="setScore(i,9)">9</button>
-  <button (click)="setScore(i,10)">10</button>
-</div>  
- 
+</div>
+<!--list-->
+
+  <ul id= "list" class="list-group">
+    <li class="list-group-item" (click)="drawGraph()" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
+      <h3 style="padding-left: 20px;font-family: sans-serif"> {{question.questionNo}}: {{question.questionName}}</h3>
+      <p style="padding-left:20px;font-family: sans-serif ">Your Rating is {{question.questionRating}} {{question.questionOverAll}}</p>
+
+  <button class="button"  (click)="setScore(i,1)">1</button>
+  <button  class="button" (click)="setScore(i,2)">2</button>
+  <button class="button" (click)="setScore(i,3)">3</button>
+  <button class="button" (click)="setScore(i,4)">4</button>
+  <button class="button" (click)="setScore(i,5)">4</button>
+  <button class="button" (click)="setScore(i,6)">6</button>
+  <button class="button" (click)="setScore(i,7)">7</button>
+  <button class="button" (click)="setScore(i,8)">8</button>
+  <button class="button" (click)="setScore(i,9)">9</button>
+  <button class="button" (click)="setScore(i,10)">10</button>
+    </li>
+  </ul>
+
+
+<!--comment section-->
+
+<h4><mark style="background: rgba(0,0,0,0.75);color: white;position:absolute;left:300px;">
+  Enter Any Additional FeedBack of Comments Here...Your FeedBack Is Valuable To Us!</mark></h4>
 <br><br>
-<h3>Enter Any Additional FeedBack of Comments Here...Your FeedBack Is Valuable To Us!</h3>
-<textarea name="comment" class="textboxclass" [(ngModel)]="feedback" placeholder="comment"></textarea>
-<button (click)="submitFeedback()">Submit Feedback!</button>
+<textarea  name="comment" class="textboxclass" [(ngModel)]="feedback" placeholder="comment"></textarea>
+<button class="button2"(click)="submitFeedback()">Submit Feedback!</button>
+
+
+
