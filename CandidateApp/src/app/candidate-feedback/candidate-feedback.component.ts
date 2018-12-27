@@ -53,7 +53,7 @@ export class CandidateFeedbackComponent implements OnInit{
       console.log(this.datePipe.transform(this.myDate, 'yyyy-MM-dd'))
       this.httpClient.post(this.g.url+this.pageName,
       {
-        localDate: this.datePipe.transform(this.myDate, 'yyyy-MM-dd'),
+        dateString: this.datePipe.transform(this.myDate, 'yyyy-MM-dd'),
         // candidateCompanyName: 'Jp Morgan',
         feedback:this.feedback,
         questionList: this.questionList
@@ -80,10 +80,6 @@ export class CandidateFeedbackComponent implements OnInit{
           console.log("Error", error);
       }
     );
-    // for(let i =0; i< 5;i++)
-    // {
-    //   this.questionList.push({questionNo: 'Q'+i, questionName: 'How was the food?', questionOverAll:'?', questionRating: null})
-    // }
   }
 
 }

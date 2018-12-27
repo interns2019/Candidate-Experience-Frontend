@@ -13,7 +13,7 @@ export class MonthlyAnalysisComponent implements OnInit {
   questionList: Array<any>;
 
   constructor(private httpClient : HttpClient, private g : Globals) {
-    this.questionList = new Array()
+    this.questionList = new Array();
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
 

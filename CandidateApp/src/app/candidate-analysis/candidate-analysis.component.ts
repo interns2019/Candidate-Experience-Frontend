@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; // for http request 
 import { Globals } from '../globals';
+import { findLast } from '@angular/compiler/src/directive_resolver';
 
 @Component({
   selector: 'app-candidate-analysis',
@@ -19,9 +20,22 @@ export class CandidateAnalysisComponent implements OnInit {
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
 
+  find()
+  {
+     for(let i=0; i<this.questionList.length; i++)
+     {
+       if(this.questionList[i].questionName === this.question)
+       {
+         return -1
+       }
+     }
+     return 0
+  }
+
   addQuestion()
   {
-    if(this.questionList.indexOf({questionName:this.question})===-1)
+    
+    if(this.find()==0)
     {
       this.questionList.push({questionNo: 'Q'+(this.questionList.length+1), questionName: this.question})   
       this.httpClient.post(this.g.url+this.addQPage,
