@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';// for routing
 import { HttpClient } from '@angular/common/http'; // for http request 
-import {CookieService} from 'angular2-cookie/core'; // for cookies
+import {CookieService} from 'angular2-cookie/core'; // for cookies for tokens
+import { Globals } from '../globals';
 
 
 
@@ -14,18 +15,17 @@ import {CookieService} from 'angular2-cookie/core'; // for cookies
 
 export class CandidateLoginComponent implements OnInit {
 
-  readonly URL =  'http://localhost:4000/';
   readonly pageName = 'login';
-  refId : string;
   password : string;
+  refId : string;
   
-  constructor(private router: Router, private httpClient: HttpClient) {
+  constructor(private router: Router, private httpClient: HttpClient, private g: Globals) {
      document.body.style.background = 'rgba(4,89,152,0.25)';
   }
 
   goToPage(pageName:string){
     
-    this.httpClient.post(this.URL+this.pageName,
+    this.httpClient.post(this.g.url+this.pageName,
       {
         refId: this.refId,
         password:this.password

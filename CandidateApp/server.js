@@ -8,12 +8,12 @@ app.use(bodyParser.json())
 
 app.use(cors());
 
-var server =app.listen("4000",function(err){
+var server =app.listen("8080",function(err){
     if(err){
       throw err
     }
     else{
-      console.log('Listening to port 4000')
+      console.log('Listening to port 8080')
     }
 })
 var a = {
@@ -34,4 +34,9 @@ app.post('/login',function(req,res){
     console.log(req.body)
     res.writeHead("200",{ "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
     res.end(JSON.stringify(a))
+})
+app.post('/hrlogin',function(req,res){
+  console.log(req.body)
+  res.writeHead("200",{ "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+  res.end(JSON.stringify(a))
 })
