@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http'; // for http request 
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-candidate-analysis',
@@ -7,11 +9,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidateAnalysisComponent implements OnInit {
 
-  constructor() {
+  question: string;
+  questionList: Array<any>;
+  readonly pageName = 'questions/all';
+  readonly addQPage = 'addQuestion';
+
+  constructor(private httpClient : HttpClient, private g : Globals) {
+    this.questionList = new Array()
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
 
+  addQuestion()
+  {
+    if(this.questionList.indexOf({questionName:this.question})===-1)
+    {
+      this.questionList.push({questionNo: 'Q'+(this.questionList.length+1), questionName: this.question})   
+      this.httpClient.post(this.g.url+this.addQPage,
+        {
+          questionNo:this.questionList.length,
+          questionName: this.question
+        })
+        .subscribe(
+            data => {
+                console.log("POST Request is successful ", data);
+            },
+            error => {
+                console.log("Error", error);
+            }
+        );
+    }
+    else{
+      alert("This question already exists!");
+    }
+  }
+
   ngOnInit() {
+    this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
+      for(let i =0; i< 4;i++)
+      {
+        this.questionList.push({questionNo: 'Q'+(i+1), questionName: data[i].questionName})
+      }
+    },
+    error => {
+        console.log("Error", error);
+    }
+  );
   }
 
 }

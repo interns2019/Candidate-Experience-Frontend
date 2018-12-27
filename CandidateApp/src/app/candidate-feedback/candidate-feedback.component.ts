@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CookieService} from 'angular2-cookie/core'; // for cookies
 import { HttpClient } from '@angular/common/http'; // for http request 
 import { Globals } from '../globals';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-candidate-feedback',
@@ -17,9 +18,10 @@ export class CandidateFeedbackComponent implements OnInit{
   cookieService: CookieService;
   questionList: Array<any>;
   feedback: string;
-  readonly pageName = 'feedback'
+  readonly pageName = 'feedback';
+  myDate = new Date();
 
-  constructor(private httpClient : HttpClient, private g: Globals){
+  constructor(private httpClient : HttpClient, private g: Globals, private datePipe: DatePipe){
     document.body.style.background = 'rgba(4,89,152,0.25)';
     this.title = 'TIAA CANDIDATE FEEDBACK';
     this.cookieService = new CookieService();  
@@ -48,9 +50,11 @@ export class CandidateFeedbackComponent implements OnInit{
 
   submitFeedback()
   {
+      console.log(this.datePipe.transform(this.myDate, 'yyyy-MM-dd'))
       this.httpClient.post(this.g.url+this.pageName,
       {
-        candidateCompanyName: 'Jp Morgan',
+        localDate: this.datePipe.transform(this.myDate, 'yyyy-MM-dd'),
+        // candidateCompanyName: 'Jp Morgan',
         feedback:this.feedback,
         questionList: this.questionList
       })
@@ -66,10 +70,10 @@ export class CandidateFeedbackComponent implements OnInit{
 
   ngOnInit()
   {
-    this.httpClient.get(this.g.url+this.pageName).subscribe(data => {
+    this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
         for(let i =0; i< 4;i++)
         {
-          this.questionList.push({questionNo: 'Q'+data[i].questionId, questionName: data[i].questionName, questionOverAll:'?', questionRating: null})
+          this.questionList.push({questionNo: 'Q'+(i+1), questionName: data[i].questionName, questionOverAll:'?', questionRating: null})
         }
       },
       error => {

@@ -19,8 +19,13 @@
   <tr>
     <td style="width:700px ; height:500px;background-color:rgba(255,255,255,0.35);padding: 20px; ">
       <canvas id='barchart'></canvas></td>
-    <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; ">
-      Make Dynamic Question List here</td>
+      <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; ">
+        <h4>Select Question to analyze:</h4>
+        <div *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
+         
+          <li (click)="drawGraph()">{{question.questionNo}}: {{question.questionName}}</li>
+        </div>  
+         </td> 
   </tr>
 </table>
 
