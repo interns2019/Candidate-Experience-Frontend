@@ -15,16 +15,24 @@
 <!-- add/delete question-->
 <table>
 <tr>
-  <td style="width:700px ; height:500px;background-color:rgba(255,255,255,0.35);padding: 20px; ">
-    <h4>Add A New Question Here!</h4>
-    <input type="text" class="textboxclass" [(ngModel)]="question" placeholder="Enter question..."/> <button (click)="addQuestion()">Add</button>
+  <td style="width:700px ; height:250px;background-color:rgba(255,255,255,0.75);padding: 20px; " class="loading2">
+    <img src="../../assets/tiaa.png" height="200px" width="400px"><h2>
+    <mark style="background: black;color: white;opacity:0.75">Welcome to Feedback Analytics!</mark></h2>
   </td>
-    <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; ">
+    <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; " rowspan="2">
     <h4>Current Questions List:</h4>
     <div *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
       <h4>{{question.questionNo}}: {{question.questionName}}</h4>
      </div> </td>
 </tr>
+<tr>
+  <td style="width:700px ; height:250px; background-color:rgba(255,255,255,0.35);padding:20px; " class="loading">
+
+
+  <h4><mark style="background: black;color: white;opacity:0.75">Add A New Question Here!</mark></h4>
+  <input type="text" class="textboxclass" [(ngModel)]="question" placeholder="Enter question..."/>
+  <button (click)="addQuestion()" style="color:black;">Add</button>
+</td></tr>
 </table>
 
 
