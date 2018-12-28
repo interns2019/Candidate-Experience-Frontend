@@ -33,6 +33,7 @@ export class YearlyAnalysisComponent implements OnInit {
           this.BarChart.data.datasets[0].borderColor.push('rgba('+r1+', '+r2+', '+r3+', 1)')
           year -= 1;
         }
+        console.log(this.BarChart.data.datasets[0].data)
         this.BarChart.update()
   }
  

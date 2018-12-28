@@ -19,13 +19,16 @@
   <tr>
     <td style="width:700px ; height:500px;background-color:rgba(255,255,255,0.35);padding: 20px; ">
       <canvas id='barchart'></canvas></td>
-      <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; ">
-          <h4>Select Question to analyze:</h4>
-          <div *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
-           
-            <li (click)="drawGraph(question.questionNo)">{{question.questionNo}}: {{question.questionName}}</li>
-          </div>  
-           </td>
+    <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; ">
+      <h4 ><mark style="background: rgba(0,0,0, 0.75);color: white;">Select Question to analyze:</mark></h4>
+
+      <ul id= "list" class="nav nav-pills nav-stacked">
+        <li style="font-weight:bold;"(click)="drawGraph(question.questionNo)" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
+          <a style="color:rgba(0,0,0, 0.75);">{{question.questionNo}}:  {{question.questionName}}</a>
+        </li>
+      </ul>
+
+    </td>
   </tr>
 </table>
 

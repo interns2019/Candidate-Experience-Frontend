@@ -62,7 +62,7 @@ export class MonthlyAnalysisComponent implements OnInit {
   ngOnInit() {
     this.reinitializeGraph()
     this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
-      for(let i =0; i< data["length"];i++)
+      for(let i =0; i< data['length'];i++)
       {
         this.questionList.push({questionNo: (i+1), questionName: data[i].questionName})
       }
