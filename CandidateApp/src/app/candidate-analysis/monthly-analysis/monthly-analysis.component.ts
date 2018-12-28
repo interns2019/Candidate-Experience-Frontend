@@ -11,16 +11,41 @@ import { Globals } from '../../globals';
 export class MonthlyAnalysisComponent implements OnInit {
   BarChart; 
   analysis;
+  fromYear: string = "overAll";
+  yearList: Array<any>;
+
   questionList: Array<any>;
 
   constructor(private httpClient : HttpClient, private g : Globals) {
     this.questionList = new Array();
+    this.yearList = new Array();
     document.body.style.background = 'rgba(4,89,152,0.25)';
+  }
+
+  setFromYear(year)
+  {
+     this.fromYear = year;
   }
 
   drawGraph(questionNo)
   {
     this.reinitializeGraph()
+    if(this.fromYear === 'overall')
+    {
+      var path = 'feedback/monthly'
+    }
+    else{
+      var path = 'feedback/monthly?year='+this.fromYear
+    }
+
+    this.httpClient.get(this.g.url+path).subscribe(data => {
+      this.analysis = data
+    },
+    error => {
+        console.log("Error", error);
+    }
+    );
+
     for(let i =1 ;i <= 12; i++)
     {
           this.BarChart.data.datasets[0].data.push(this.analysis[''+i][''+questionNo])
@@ -32,6 +57,7 @@ export class MonthlyAnalysisComponent implements OnInit {
     }
     this.BarChart.update()
   }
+
 
   reinitializeGraph()
   {
@@ -60,25 +86,32 @@ export class MonthlyAnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reinitializeGraph()
-    this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
-      for(let i =0; i< data['length'];i++)
-      {
-        this.questionList.push({questionNo: (i+1), questionName: data[i].questionName})
-      }
-    },
-    error => {
-        console.log("Error", error);
-    }
-   );
-  
-   this.httpClient.get(this.g.url+'feedback/monthly').subscribe(data => {
-    this.analysis = data
-  },
-  error => {
-      console.log("Error", error);
-  }
- );
-  
-  }  
+          this.reinitializeGraph()
+          this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
+            for(let i =0; i< data['length'];i++)
+            {
+              this.questionList.push({questionNo: (i+1), questionName: data[i].questionName})
+            }
+          },
+          error => {
+              console.log("Error", error);
+          }
+        );
+        
+        
+
+        this.httpClient.get(this.g.url+'feedback/yearly').subscribe(data => {
+          var  year = 2019    //Date.getFullYear()
+          while(data[''+year]!==undefined)
+          {
+            this.yearList.push(''+year)
+            year -=1
+          }
+          this.yearList.push('overAll')
+        },
+        error => {
+            console.log("Error", error);
+        }
+        );
+    }  
 }
