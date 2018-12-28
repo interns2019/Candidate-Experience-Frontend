@@ -39,23 +39,22 @@ export class MonthlyAnalysisComponent implements OnInit {
     }
 
     this.httpClient.get(this.g.url+path).subscribe(data => {
-      this.analysis = data
+      
+      for(let i =1 ;i <= 12; i++)
+      {
+            this.BarChart.data.datasets[0].data.push(data[i][''+questionNo])
+            var r1 = Math.round(Math.random()*255) 
+            var r2 = Math.round(Math.random()*255)
+            var r3 = Math.round(Math.random()*255)
+            this.BarChart.data.datasets[0].backgroundColor.push('rgba('+r1+', '+r2+', '+r3+', 0.45)')
+            this.BarChart.data.datasets[0].borderColor.push('rgba('+r1+', '+r2+', '+r3+', 1)')
+      }
+      this.BarChart.update()
     },
     error => {
         console.log("Error", error);
     }
     );
-
-    for(let i =1 ;i <= 12; i++)
-    {
-          this.BarChart.data.datasets[0].data.push(this.analysis[''+i][''+questionNo])
-          var r1 = Math.round(Math.random()*255) 
-          var r2 = Math.round(Math.random()*255)
-          var r3 = Math.round(Math.random()*255)
-          this.BarChart.data.datasets[0].backgroundColor.push('rgba('+r1+', '+r2+', '+r3+', 0.45)')
-          this.BarChart.data.datasets[0].borderColor.push('rgba('+r1+', '+r2+', '+r3+', 1)')
-    }
-    this.BarChart.update()
   }
 
 

@@ -44,6 +44,7 @@ export class CandidateFeedbackComponent implements OnInit {
   }
 
   submitFeedback() {
+    
     console.log(this.datePipe.transform(this.myDate, 'yyyy-MM-dd'));
     this.httpClient
       .post(this.g.url + this.pageName, {
@@ -69,10 +70,11 @@ export class CandidateFeedbackComponent implements OnInit {
 
         for (let i = 0; i < data["length"]; i++) {
           this.questionList.push({
-            questionNo: (i + 1),
+            questionNo: i,
             questionName: data[i].questionName,
             questionOverAll: '?',
-            questionRating: null
+            questionRating: null,
+            visible: data[i].visible
           });
         }
       },

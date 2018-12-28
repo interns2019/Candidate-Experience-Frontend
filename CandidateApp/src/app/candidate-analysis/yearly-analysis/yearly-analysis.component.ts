@@ -40,6 +40,7 @@ export class YearlyAnalysisComponent implements OnInit {
 
   reinitalizeGraph()
   {
+    this.BarChart = null
     this.BarChart=new Chart ('barchart', {
       type: 'bar',
       data: {
