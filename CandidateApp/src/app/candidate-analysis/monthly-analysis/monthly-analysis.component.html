@@ -23,7 +23,7 @@
         <h4 ><mark style="background: rgba(0,0,0, 0.75);color: white;">Select Question to analyze:</mark></h4>
 
           <ul id= "list" class="nav nav-pills nav-stacked">
-          <li (click)="drawGraph()" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
+          <li style="font-weight:bold;" (click)="drawGraph()" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
             <a style="color:rgba(0,0,0, 0.75);">{{question.questionNo}}:  {{question.questionName}}</a>
              </li>
           </ul>
