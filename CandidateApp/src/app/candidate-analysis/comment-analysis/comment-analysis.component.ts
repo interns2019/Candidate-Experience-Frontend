@@ -14,6 +14,9 @@ export class CommentAnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+
     this.PieChart=new Chart ('piechart', {
       type: 'pie',
       data: {

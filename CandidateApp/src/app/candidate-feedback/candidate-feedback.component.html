@@ -13,7 +13,7 @@
 <!--list-->
   
 <div *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" >
-  <div *ngIf= "question.visible">
+  <div *ngIf= "!question.visible">
   <ul id= "list" class="list-group">
     <li class="list-group-item" >
       <h3 style="padding-left: 20px;font-family: sans-serif"> {{question.questionNo+1}}: {{question.questionName}}</h3>

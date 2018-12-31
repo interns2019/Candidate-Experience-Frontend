@@ -14,18 +14,22 @@
 </nav>
 
 
-<ul>
-  <li (click)="setFromYear(year)" *ngFor="let year of yearList ; let i = index" [attr.data-index]="i">
-    <a style="color:rgba(0,0,0, 0.75);">{{year}}</a>
-     </li>
-  </ul>
+
 <!-- chart.js code -->
-{{fromYear}} Analysis
+
 <table>
   <tr>
     <td style="width:700px ; height:500px;background-color:rgba(255,255,255,0.35);padding: 20px; ">
+      <h2>{{fromYear}} Analysis</h2>
+
       <canvas id='barchart'></canvas></td>
       <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; ">
+
+          <button class="button" (click)="setFromYear(year)" *ngFor="let year of yearList ; let i = index" [attr.data-index]="i">
+            {{year}}</button>
+
+
+
         <h4 ><mark style="background: rgba(0,0,0, 0.75);color: white;">Select Question to analyze:</mark></h4>
 
           <ul id= "list" class="nav nav-pills nav-stacked">
