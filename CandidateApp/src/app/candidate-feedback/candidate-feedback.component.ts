@@ -3,6 +3,8 @@ import { CookieService } from 'angular2-cookie/core'; // for cookies
 import { HttpClient } from '@angular/common/http'; // for http request
 import { Globals } from '../globals';
 import { DatePipe } from '@angular/common';
+import { Http, Headers, RequestOptions,Response} from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-candidate-feedback',
@@ -20,7 +22,8 @@ export class CandidateFeedbackComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private g: Globals,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private http: Http
   ) {
     document.body.style.background = 'rgba(4,89,152,0.25)';
     this.title = 'TIAA CANDIDATE FEEDBACK';
@@ -39,9 +42,7 @@ export class CandidateFeedbackComponent implements OnInit {
     }
   }
 
-  setCookie() {
-    this.cookieService.put('test', 'testingCookie');
-  }
+
 
   submitFeedback() {
     
@@ -61,6 +62,12 @@ export class CandidateFeedbackComponent implements OnInit {
           console.log('Error', error);
         }
       );
+
+      this.http.post(this.g.url+"logout",{})
+      .map((response: Response) => {
+        this.cookieService.removeAll()
+      });
+      
   }
 
   ngOnInit() {
