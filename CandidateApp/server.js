@@ -3,6 +3,15 @@ var app= express()
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
+
+var Analyzer = require('natural').SentimentAnalyzer;
+var stemmer = require('natural').PorterStemmer;
+var analyzer = new Analyzer("English", stemmer, "afinn");
+
+
+
+console.log(analyzer.getSentiment(["I", "like", "cherries"]));
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 

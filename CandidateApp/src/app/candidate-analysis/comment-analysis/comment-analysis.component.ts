@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+
 @Component({
   selector: 'app-comment-analysis',
   templateUrl: './comment-analysis.component.html',
@@ -12,6 +13,9 @@ export class CommentAnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+
     this.PieChart=new Chart ('piechart', {
       type: 'pie',
       data: {

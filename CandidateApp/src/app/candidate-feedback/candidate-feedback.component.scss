@@ -37,8 +37,9 @@ button:hover{
   background:rgba(153, 102, 255, 0.5);
   font-size:12px;
   border-radius:40px;
-  position: relative;
-  left:250px;
+  position: absolute;
+  margin-left: 250px;
+
 
 }
 button2:hover{

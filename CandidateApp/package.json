@@ -27,6 +27,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "natural": "^0.6.3",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.3.3",
     "tether": "^1.4.5",
