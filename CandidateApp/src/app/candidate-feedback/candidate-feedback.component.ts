@@ -45,7 +45,7 @@ export class CandidateFeedbackComponent implements OnInit {
 
   submitFeedback() {
     
-    console.log(this.datePipe.transform(this.myDate, 'yyyy-MM-dd'));
+    
     this.httpClient
       .post(this.g.url + this.pageName, {
         dateString: this.datePipe.transform(this.myDate, 'yyyy-MM-dd'),

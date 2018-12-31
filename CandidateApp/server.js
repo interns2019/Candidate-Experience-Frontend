@@ -2,6 +2,11 @@ var express = require('express')
 var app= express()
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var Analyzer = require('natural').SentimentAnalyzer;
+var stemmer = require('natural').PorterStemmer;
+var analyzer = new Analyzer("English", stemmer, "afinn");
+// getSentiment expects an array of strings
+    
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

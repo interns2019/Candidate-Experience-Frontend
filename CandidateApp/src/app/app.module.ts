@@ -6,7 +6,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service'; // for
 import { CandidateLoginComponent } from './candidate-login/candidate-login.component';
 import { CandidateFeedbackComponent } from './candidate-feedback/candidate-feedback.component';
 import { FormsModule } from '@angular/forms'; // for tow way data binding
-import { HttpClientModule } from '@angular/common/http'; // for http request 
+import { HttpClientModule } from '@angular/common/http'; // for http request
+import {HttpModule} from "@angular/http"; 
 import { Globals } from './globals';
 import { CandidateAnalysisComponent } from './candidate-analysis/candidate-analysis.component';
 import { HrLoginComponent } from './hr-login/hr-login.component';
@@ -28,10 +29,10 @@ import { DatePipe } from '@angular/common';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     AppRoutingModule,
     FormsModule, // for tow way data binding
     HttpClientModule // for http request
-
   ],
   providers: [
     CookieService,

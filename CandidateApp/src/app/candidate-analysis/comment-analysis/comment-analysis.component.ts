@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+
 @Component({
   selector: 'app-comment-analysis',
   templateUrl: './comment-analysis.component.html',
   styleUrls: ['./comment-analysis.component.scss']
 })
+
 export class CommentAnalysisComponent implements OnInit {
   PieChart=[];
   constructor() {
