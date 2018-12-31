@@ -63,7 +63,8 @@ muteQuestion(){
       this.httpClient
         .post(this.g.url + this.addQPage, {
           questionNo: this.questionList.length,
-          questionName: this.question
+          questionName: this.question,
+          visible: true
         })
         .subscribe(
           data => {
