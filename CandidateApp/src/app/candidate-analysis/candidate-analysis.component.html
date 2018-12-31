@@ -12,38 +12,52 @@
     </ul>
   </div>
 </nav>
-<!-- add/delete question-->
+
 <table>
 <tr>
   <td style="width:700px ; height:250px;background-color:rgba(255,255,255,0.75);padding: 20px; " class="loading2">
-    <img src="../../assets/tiaa.png" height="200px" width="400px"><h2 style="color:rgb(4,89,152);text-shadow: 2px 2px white;font-weight: bold">
+   <<img src="../../assets/tiaa.png" height="200px" width="400px"><h2 style="color:rgb(4,89,152);text-shadow: 2px 2px white;font-weight: bold">
     Welcome to Feedback Analytics!</h2>
+
+
+
+
   </td>
 
-    <td class="loading2" style="width:700px ; height:500px; padding:20px; " rowspan="2">
+    <td style="width:700px ; height:500px; padding:20px;background:rgba(255,255,255,0.55); " rowspan="2">
 
 
       <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Current Questions List:</mark></h4>
       <ul id= "list" class="list-group">
-        <li class="list-group-item" style="font-weight:bold;"(click)="drawGraph()" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i">
+        <li class="list-group-item" style="font-weight:bold;" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" (click)="selectQuestion(question.questionName)" >
           {{question.questionNo}}:  {{question.questionName}}
         </li>
-      </ul>
-
-
-
+        </ul>
 
     </td>
 </tr>
+
+
 <tr>
-  <td style="width:700px ; height:250px; background-color:rgba(255,255,255,0.35);padding:20px; " class="loading">
+  <td style="width:700px ; height:250px; background-color:rgba(255,255,255,0.35);padding:20px; " >
+
+<!--add question-->
 
 
-  <h4><mark style="background: black;color: white;opacity:0.75">Add A New Question Here!</mark></h4>
+    <h4><mark style="background: black;color: white;opacity:0.75">Add A New Question Here!</mark></h4>
   <input type="text" class="textboxclass" [(ngModel)]="question" placeholder="Enter question..."/>
-  <button (click)="addQuestion()" style="color:black;">Add</button>
+    <button class="button"(click)="addQuestion()" style="color:black;">Add</button><br><br>
+    <!--update-->
+
+    <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Selected Question:</mark>{{editQuestion}}</h4>
+    <input type="text" class="textboxclass" placeholder="Edit.." >
+
+    <button class="button"(click)="updateQuestion()" style="color:black;">Update</button>
+    <button class="button"(click)="muteQuestion()" style="color:black;">Mute</button>
+
 </td></tr>
 </table>
+
 
 
 
