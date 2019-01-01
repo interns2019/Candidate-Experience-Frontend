@@ -15,6 +15,10 @@ import { MonthlyAnalysisComponent } from './candidate-analysis/monthly-analysis/
 import { YearlyAnalysisComponent } from './candidate-analysis/yearly-analysis/yearly-analysis.component';
 import { CommentAnalysisComponent } from './candidate-analysis/comment-analysis/comment-analysis.component' // global variables
 import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -28,11 +32,15 @@ import { DatePipe } from '@angular/common';
     CommentAnalysisComponent
   ],
   imports: [
+    MatButtonModule,
+    MatInputModule,
     BrowserModule,
     HttpModule,
     AppRoutingModule,
     FormsModule, // for tow way data binding
-    HttpClientModule // for http request
+    HttpClientModule, // for http request
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [
     CookieService,

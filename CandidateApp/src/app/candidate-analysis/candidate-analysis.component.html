@@ -12,11 +12,11 @@
     </ul>
   </div>
 </nav>
-
+<!--
 <table>
 <tr>
   <td style="width:700px ; height:250px;background-color:rgba(255,255,255,0.75);padding: 20px; " class="loading2">
-   <<img src="../../assets/tiaa.png" height="200px" width="400px"><h2 style="color:rgb(4,89,152);text-shadow: 2px 2px white;font-weight: bold">
+   <img src="../../assets/tiaa.png" height="200px" width="400px"><h2 style="color:rgb(4,89,152);text-shadow: 2px 2px white;font-weight: bold">
     Welcome to Feedback Analytics!</h2>
 
 
@@ -41,24 +41,73 @@
 <tr>
   <td style="width:700px ; height:250px; background-color:rgba(255,255,255,0.35);padding:20px; " >
 
-<!--add question-->
 
 
-    <h4><mark style="background: black;color: white;opacity:0.75">Add A New Question Here!</mark></h4>
-  <input type="text" class="textboxclass" [(ngModel)]="question" placeholder="Enter question..."/>
-    <button class="button"(click)="addQuestion()" style="color:black;">Add</button><br><br>
-    <!--update-->
+    <mat-tab-group>
+      <mat-tab label="First">
+              Content
+      </mat-tab>
+      <mat-tab label="Second">
+              <h4><mark style="background: black;color: white;opacity:0.75">Add A New Question Here!</mark></h4>
+              <input type="text" class="textboxclass" [(ngModel)]="question" placeholder="Enter question..."/>
+              <button class="button"(click)="addQuestion()" style="color:black;">Add</button><br><br>
 
-    <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Selected Question:</mark>{{editQuestion}}</h4>
-    <input type="text" class="textboxclass" placeholder="Edit.." >
+      </mat-tab>
+      <mat-tab label="Third">
+              <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Selected Question:</mark>{{editQuestion}}</h4>
+              <input type="text" class="textboxclass" placeholder="Edit.." >
 
-    <button class="button"(click)="updateQuestion()" style="color:black;">Update</button>
-    <button class="button"(click)="muteQuestion()" style="color:black;">Mute</button>
-
+              <button class="button"(click)="updateQuestion()" style="color:black;">Update</button>
+              <button class="button"(click)="muteQuestion()" style="color:black;">Mute</button>
+      </mat-tab>
+    </mat-tab-group>
 </td></tr>
 </table>
 
+-->
+<table><tr>
+  <td style="width:700px ; height:550px; background-color:rgba(255,255,255,0.35);padding:20px;" >
+<mat-tab-group>
+  <mat-tab label="Welcome">
+    <h3>Welcome to Feedback Analytics!</h3>
+    Features:<br>
+    *Add/Mute/Unmute Questions from the given List<br>
+    *Select a Question to Update Name<br>
+    *Check the monthly/yearly analysis for each question.<br>
+  </mat-tab>
+  <mat-tab label="Add Question">
+
+
+    <mat-form-field >
+      <input matInput [(ngModel)]="question" placeholder="Add A New Question Here! " value="Type.." style="width:100%">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addQuestion()" >Add</button><br><br>
+
+    <!--update-->
+  </mat-tab>
+  <mat-tab label="Update Question">
+    <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Selected Question:</mark>{{editQuestion}}</h4>
+    <mat-form-field >
+      <input matInput [(ngModel)]="question" placeholder="Update Question Here! " value="Type.." style="width:100%">
+    </mat-form-field>
+    <button  mat-raised-button color="primary" (click)="updateQuestion()" >Update</button>
+  </mat-tab>
+</mat-tab-group>
+  </td>
+<td style="width:700px ; height:550px; background-color:rgba(255,255,255,0.75);padding:20px;">
+
+
+  <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Current Questions List:</mark></h4>
+  <ul id= "list" class="list-group">
+    <li class="list-group-item" style="font-weight:bold;" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" (click)="selectQuestion(question.questionName)" >
+      {{question.questionNo}}:  {{question.questionName}}
+    </li>
+  </ul>
 
 
 
+
+</td>
+</tr>
+</table>
 

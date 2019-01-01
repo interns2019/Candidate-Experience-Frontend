@@ -14,7 +14,7 @@ export class CandidateAnalysisComponent implements OnInit {
   editQuestion: string;
 
   readonly addQPage = 'questions';
- readonly updateQPage='questions';
+  readonly updateQPage='questions';
 
   constructor(private httpClient: HttpClient, private g: Globals) {
     this.questionList = new Array();
@@ -29,30 +29,30 @@ export class CandidateAnalysisComponent implements OnInit {
     }
     return 0;
   }
-selectQuestion(question){
+  selectQuestion(question){
 
     this.editQuestion = question
-}
-updateQuestion(){
+  }
+  updateQuestion(){
 
-  this.httpClient
-    .post(this.g.url + this.updateQPage, {
-      questionName: this.question
-    })
-    .subscribe(
-      data => {
-        console.log('POST Request is successful ', data);
-      },
-      error => {
-        console.log('Error', error);
-      }
-    );
-}
+    this.httpClient
+      .post(this.g.url + this.updateQPage, {
+        questionName: this.question
+      })
+      .subscribe(
+        data => {
+          console.log('POST Request is successful ', data);
+        },
+        error => {
+          console.log('Error', error);
+        }
+      );
+  }
 
-muteQuestion(){
+  muteQuestion(){
 
 
-}
+  }
 
   addQuestion() {
     if (this.find() == 0) {
