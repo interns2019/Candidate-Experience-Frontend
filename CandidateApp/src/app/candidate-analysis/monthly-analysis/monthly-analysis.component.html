@@ -25,19 +25,34 @@
       <canvas id='barchart'></canvas></td>
       <td style="width:700px ; height:500px; background-color:rgba(255,255,255,0.55);padding:20px; ">
 
-          <button class="button" (click)="setFromYear(year)" *ngFor="let year of yearList ; let i = index" [attr.data-index]="i">
-            {{year}}</button>
+        <mat-horizontal-stepper [linear]="false" #stepper>
+          <mat-step>
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" style="background:rgb(153, 102, 255);">
+              <mat-button-toggle (click)="setFromYear(year)" *ngFor="let year of yearList ; let i = index" [attr.data-index]="i">
+                {{year}}</mat-button-toggle>
+            </mat-button-toggle-group>
+            <ng-template matStepLabel>Select a Year</ng-template>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <h4 ><mark style="background: rgba(0,0,0, 0.75);color: white;">Select Question to analyze:</mark></h4>
 
-
-
-        <h4 ><mark style="background: rgba(0,0,0, 0.75);color: white;">Select Question to analyze:</mark></h4>
-
-          <ul id= "list" class="nav nav-pills nav-stacked">
-          <li style="font-weight:bold;"  *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" (click)="drawGraph(question.questionNo)">
-            <a style="color:rgba(0,0,0, 0.75);">{{question.questionNo}}:  {{question.questionName}}</a>
-             </li>
-          </ul>
+            <ul id= "list" class="nav nav-pills nav-stacked">
+              <li style="font-weight:bold;"  *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" (click)="drawGraph(question.questionNo)">
+                <a style="color:rgba(0,0,0, 0.75);">{{question.questionNo}}:  {{question.questionName}}</a>
+              </li>
+            </ul>
+            <ng-template matStepLabel>Select a Question</ng-template>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
          </td> 
   </tr>
 </table>
+
 

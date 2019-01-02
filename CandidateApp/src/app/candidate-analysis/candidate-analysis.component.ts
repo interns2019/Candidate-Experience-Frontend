@@ -15,7 +15,7 @@ export class CandidateAnalysisComponent implements OnInit {
   selectedQ: string;
 
   readonly addQPage = 'questions';
- readonly updateQPage='questions';
+  readonly updateQPage='questions';
 
   constructor(private httpClient: HttpClient, private g: Globals) {
     this.questionList = new Array();
