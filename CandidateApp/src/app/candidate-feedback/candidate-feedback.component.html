@@ -18,17 +18,17 @@
     <li class="list-group-item" >
       <h3 style="padding-left: 20px;font-family: sans-serif"> {{question.questionNo+1}}: {{question.questionName}}</h3>
       <p style="padding-left:20px;font-family: sans-serif ">Your Rating is {{question.questionRating}} {{question.questionOverAll}}</p>
-
-  <button class="button"  (click)="setScore(i,1)">1</button>
-  <button  class="button" (click)="setScore(i,2)">2</button>
-  <button class="button" (click)="setScore(i,3)">3</button>
-  <button class="button" (click)="setScore(i,4)">4</button>
-  <button class="button" (click)="setScore(i,5)">4</button>
-  <button class="button" (click)="setScore(i,6)">6</button>
-  <button class="button" (click)="setScore(i,7)">7</button>
-  <button class="button" (click)="setScore(i,8)">8</button>
-  <button class="button" (click)="setScore(i,9)">9</button>
-  <button class="button" (click)="setScore(i,10)">10</button>
+<div style="padding-left:130px;">
+  <button class="space" mat-mini-fab color="primary"  (click)="setScore(i,1)">1</button>
+  <button   class="space" mat-mini-fab color="primary" (click)="setScore(i,2)">2</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,3)">3</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,4)">4</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,5)">5</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,6)">6</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,7)">7</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,8)">8</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,9)">9</button>
+  <button  class="space" mat-mini-fab color="primary" (click)="setScore(i,10)">10</button></div>
 </li>
   </ul>
   </div>

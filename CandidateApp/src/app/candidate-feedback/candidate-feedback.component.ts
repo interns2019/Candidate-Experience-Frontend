@@ -5,6 +5,7 @@ import { Globals } from '../globals';
 import { DatePipe } from '@angular/common';
 import { Http, Headers, RequestOptions,Response} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-candidate-feedback',
@@ -23,7 +24,8 @@ export class CandidateFeedbackComponent implements OnInit {
     private httpClient: HttpClient,
     private g: Globals,
     private datePipe: DatePipe,
-    private http: Http
+    private http: Http,
+    private authService:AuthService
   ) {
     document.body.style.background = 'rgba(4,89,152,0.25)';
     this.title = 'TIAA CANDIDATE FEEDBACK';
@@ -57,6 +59,9 @@ export class CandidateFeedbackComponent implements OnInit {
       .subscribe(
         data => {
           console.log('POST Request is successful ', data);
+          if(data){
+            this.authService.logoutUser();
+          }
         },
         error => {
           console.log('Error', error);

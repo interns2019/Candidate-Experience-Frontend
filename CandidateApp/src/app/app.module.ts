@@ -6,7 +6,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service'; // for
 import { CandidateLoginComponent } from './candidate-login/candidate-login.component';
 import { CandidateFeedbackComponent } from './candidate-feedback/candidate-feedback.component';
 import { FormsModule } from '@angular/forms'; // for tow way data binding
-import { HttpClientModule } from '@angular/common/http'; // for http request
+
 import {HttpModule} from "@angular/http"; 
 import { Globals } from './globals';
 import { CandidateAnalysisComponent } from './candidate-analysis/candidate-analysis.component';
@@ -25,6 +25,11 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
+import {TokenInterceptorService} from './auth/token-interceptor.service';
+import { AuthAdminGuard } from './auth/auth-admin.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'; // for http request
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +57,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   providers: [
     CookieService,
     Globals,
-    DatePipe
+    DatePipe,
+    AuthGuard,
+    AuthAdminGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ], // for cookies
   bootstrap: [AppComponent]
 })

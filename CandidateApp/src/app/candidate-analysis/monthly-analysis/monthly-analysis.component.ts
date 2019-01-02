@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { HttpClient } from '@angular/common/http'; // for http request 
 import { Globals } from '../../globals';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-monthly-analysis',
@@ -16,7 +17,7 @@ export class MonthlyAnalysisComponent implements OnInit {
 
   questionList: Array<any>;
 
-  constructor(private httpClient : HttpClient, private g : Globals) {
+  constructor(private httpClient : HttpClient, private g : Globals,private authService:AuthService) {
     this.questionList = new Array();
     this.yearList = new Array();
     document.body.style.background = 'rgba(4,89,152,0.25)';
@@ -32,10 +33,10 @@ export class MonthlyAnalysisComponent implements OnInit {
     this.reinitializeGraph()
     if(this.fromYear === 'overall')
     {
-      var path = 'feedback/monthly'
+      var path = 'analysis/monthly'
     }
     else{
-      var path = 'feedback/monthly?year='+this.fromYear
+      var path = 'analysis/monthly?year='+this.fromYear
     }
 
     this.httpClient.get(this.g.url+path).subscribe(data => {
@@ -99,7 +100,7 @@ export class MonthlyAnalysisComponent implements OnInit {
         
         
 
-        this.httpClient.get(this.g.url+'feedback/yearly').subscribe(data => {
+        this.httpClient.get(this.g.url+'analysis/yearly').subscribe(data => {
           var  year = 2019    //Date.getFullYear()
           while(data[''+year]!==undefined)
           {
@@ -113,4 +114,7 @@ export class MonthlyAnalysisComponent implements OnInit {
         }
         );
     }  
+    logout(){
+      this.authService.logoutAdmin();
+     }
 }

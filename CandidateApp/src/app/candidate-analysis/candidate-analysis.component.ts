@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; // for http request
 import { Globals } from '../globals';
 import { findLast } from '@angular/compiler/src/directive_resolver';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-candidate-analysis',
@@ -17,7 +18,7 @@ export class CandidateAnalysisComponent implements OnInit {
   readonly addQPage = 'questions';
   readonly updateQPage='questions';
 
-  constructor(private httpClient: HttpClient, private g: Globals) {
+  constructor(private httpClient: HttpClient, private g: Globals, private authService:AuthService) {
     this.questionList = new Array();
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
@@ -123,5 +124,10 @@ updateQuestion(i)
         console.log('Error', error);
       }
     );
+  }
+
+  logout(){
+  this.authService.logoutAdmin();
+  
   }
 }

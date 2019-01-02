@@ -9,7 +9,7 @@ import { Globals } from '../globals';
   styleUrls: ['./hr-login.component.scss']
 })
 export class HrLoginComponent implements OnInit {
-  readonly pageName = 'hrlogin';
+  readonly pageName = 'account/login/admin';
   emppassword : string;
   empId : string;
 
@@ -21,13 +21,23 @@ export class HrLoginComponent implements OnInit {
 
     this.httpClient.post(this.g.url+this.pageName,
       {
-        empId: this.empId,
-        emppassword:this.emppassword
+        username: this.empId,
+        password:this.emppassword,
+        role : "ROLE_ADMIN"
       })
       .subscribe(
         data => {
-          console.log("POST Request is successful ", data);
-          this.router.navigate([`${pageName}`]);
+          // console.log("POST Request is successful ", data);
+          // this.router.navigate([`${pageName}`]);
+
+          var t:String = JSON.stringify(data)
+          var token:String = t.substring(10,t.length-2);
+          localStorage.setItem('#token$',token+"");
+          
+          if(data){
+            this.router.navigateByUrl("/analysis");
+          }
+
         },
         error => {
           console.log("Error has occured", error);

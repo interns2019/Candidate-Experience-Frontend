@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-comment-analysis',
@@ -9,7 +10,7 @@ import Chart from 'chart.js';
 
 export class CommentAnalysisComponent implements OnInit {
   PieChart=[];
-  constructor() {
+  constructor(private authService:AuthService) {
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
 
@@ -36,5 +37,9 @@ export class CommentAnalysisComponent implements OnInit {
     });
   }
 
+  logout(){
+    this.authService.logoutAdmin();
+    
+    }
 }
 

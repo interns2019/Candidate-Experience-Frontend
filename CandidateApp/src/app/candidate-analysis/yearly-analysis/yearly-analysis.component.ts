@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { HttpClient } from '@angular/common/http'; // for http request 
 import { Globals } from '../../globals';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-yearly-analysis',
@@ -13,7 +14,7 @@ export class YearlyAnalysisComponent implements OnInit {
   analysis;
   questionList: Array<any>;
 
-  constructor(private httpClient : HttpClient, private g : Globals) {
+  constructor(private httpClient : HttpClient, private g : Globals, private authService:AuthService) {
     this.questionList = new Array();
     document.body.style.background = 'rgba(4,89,152,0.25)';
   }
@@ -70,7 +71,7 @@ export class YearlyAnalysisComponent implements OnInit {
         
     this.reinitalizeGraph()
     var num = new Number(266);
-    this.httpClient.get(this.g.url+'feedback/yearly').subscribe(data => {
+    this.httpClient.get(this.g.url+'analysis/yearly').subscribe(data => {
         this.analysis = data
     },
     error => {
@@ -90,4 +91,7 @@ export class YearlyAnalysisComponent implements OnInit {
    );
   }
 
+  logout(){
+    this.authService.logoutAdmin();
+    }
 }
