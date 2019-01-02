@@ -32,6 +32,7 @@ export class CandidateLoginComponent implements OnInit {
 
 
   goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
     let headers = new Headers();
     headers.append('Accept', 'application/json')
     // creating base64 encoded String from user name and password
@@ -42,18 +43,17 @@ export class CandidateLoginComponent implements OnInit {
     let options = new RequestOptions();
     options.headers=headers;
 
-    this.http.get(this.g.url+"/account/login" ,   options)
-      .map((response: Response) => {
-      // login successful if there's a jwt token in the response
-      let user = response.json().principal;// the returned user object is a principal object
-      if (user) {
-        // store user details  in local storage to keep user logged in between page refreshes
-        this.cookie.put('currentUser', JSON.stringify(user));
-      }
-      else{
-        this.router.navigate([`${pageName}`]);
-      }
-    });
+    // this.http.get(this.g.url+"/account/login" ,   options)
+    //   .map((response: Response) => {
+    //   // login successful if there's a jwt token in the response
+    //   let user = response.json().principal;// the returned user object is a principal object
+    //   if (user) {
+    //     // store user details  in local storage to keep user logged in between page refreshes
+    //     this.cookie.put('currentUser', JSON.stringify(user));
+    //   }
+    //   else{
+    //   }
+    // });
   }
   
   ngOnInit() {
