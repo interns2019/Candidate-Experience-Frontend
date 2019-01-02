@@ -11,7 +11,8 @@ import { findLast } from '@angular/compiler/src/directive_resolver';
 export class CandidateAnalysisComponent implements OnInit {
   question: string;
   questionList: Array<any>;
-  editQuestion: string;
+  editQuestion: number;
+  selectedQ: string;
 
   readonly addQPage = 'questions';
  readonly updateQPage='questions';
@@ -29,36 +30,61 @@ export class CandidateAnalysisComponent implements OnInit {
     }
     return 0;
   }
-selectQuestion(question){
+selectQuestion(index){
 
-    this.editQuestion = question
-}
-updateQuestion(){
-
-  this.httpClient
-    .post(this.g.url + this.updateQPage, {
-      questionName: this.question
-    })
-    .subscribe(
-      data => {
-        console.log('POST Request is successful ', data);
-      },
-      error => {
-        console.log('Error', error);
-      }
-    );
+    this.selectedQ = this.questionList[index].questionName
+    this.editQuestion = index
 }
 
-muteQuestion(){
 
 
+
+
+setVisiblity(i)
+{
+   this.editQuestion = i 
+   if(this.questionList[i].visible)
+   {
+    this.questionList[i].visible = false
+   }
+   else{
+    this.questionList[i].visible = true
+   }
+   this.updateQuestion(i)
 }
+
+
+updateQuestion(i)
+{
+  if(this.editQuestion != null)
+  {
+    this.httpClient.put(this.g.url+'questions',{
+    _id : this.questionList[i]._id, 
+    questionName: this.questionList[i].questionName,
+    questionNo: this.questionList[i].questionNo,
+    visible: this.questionList[i].visible
+  }).subscribe(
+    data => {
+      console.log('POST Request is successful ', data);
+    },
+    error => {
+      console.log('Error', error);
+    }
+  );
+ }
+ else{
+   alert("No question selected!")
+ }
+}
+
+
 
   addQuestion() {
     if (this.find() == 0) {
       this.questionList.push({
         questionNo: 'Q' + (this.questionList.length + 1),
-        questionName: this.question
+        questionName: this.question,
+        
       });
       this.httpClient
         .post(this.g.url + this.addQPage, {
@@ -86,8 +112,10 @@ muteQuestion(){
 
         for (let i = 0; i < data["length"]; i++) {
           this.questionList.push({
+            _id: data[i]._id,
             questionNo: 'Q' + (i + 1),
-            questionName: data[i].questionName
+            questionName: data[i].questionName,
+            visible: data[i].visible
           });
         }
       },
