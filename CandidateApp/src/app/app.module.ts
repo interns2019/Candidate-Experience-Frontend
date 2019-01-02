@@ -24,6 +24,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     YearlyAnalysisComponent,
     CommentAnalysisComponent
   ],
-  imports: [MatListModule,MatDividerModule,MatStepperModule,
+  imports: [MatListModule,MatDividerModule,MatStepperModule,MatFormFieldModule,
     MatCardModule,
     MatButtonToggleModule,
     MatButtonModule,

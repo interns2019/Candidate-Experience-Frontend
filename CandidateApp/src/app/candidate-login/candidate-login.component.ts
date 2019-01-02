@@ -8,11 +8,15 @@ import { Http, Headers, RequestOptions,Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
+
+
 @Component({
   selector: 'app-candidate-login',
   templateUrl: './candidate-login.component.html',
   styleUrls: ['./candidate-login.component.scss']
 })
+
+
 
 
 export class CandidateLoginComponent implements OnInit {
@@ -24,6 +28,8 @@ export class CandidateLoginComponent implements OnInit {
   constructor(private router: Router, private http: Http, private g: Globals, private cookie: CookieService) {
      document.body.style.background = 'rgba(4,89,152,0.25)';
   }
+
+
 
   goToPage(pageName:string){
     let headers = new Headers();
