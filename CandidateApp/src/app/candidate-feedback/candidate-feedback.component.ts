@@ -47,7 +47,7 @@ export class CandidateFeedbackComponent implements OnInit {
 
 
   submitFeedback() {
-    
+
     
     this.httpClient
       .post(this.g.url + this.pageName, {
@@ -70,6 +70,7 @@ export class CandidateFeedbackComponent implements OnInit {
 
       this.http.post(this.g.url+"logout",{})
       .map((response: Response) => {
+        
         this.cookieService.removeAll()
       });
       
