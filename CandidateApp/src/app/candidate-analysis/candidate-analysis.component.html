@@ -55,11 +55,11 @@
   <ul id= "list" class="list-group">
     <li class="list-group-item" style="font-weight:bold;" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" (click)="selectQuestion(i)" >
         <div *ngIf= "question.visible"> 
-      <button (click)="setVisiblity(i)">MUTE</button>
+      <button mat-raised-button color="primary" (click)="setVisiblity(i)">MUTE</button>
       {{question.questionNo}}:  {{question.questionName}}
       </div>
       <div *ngIf= "!question.visible"> 
-          <button (click)="setVisiblity(i)">UNMUTE</button>
+          <button mat-raised-button color="primary" (click)="setVisiblity(i)">UNMUTE</button>
           {{question.questionNo}}:  {{question.questionName}}  
         </div>
     </li>

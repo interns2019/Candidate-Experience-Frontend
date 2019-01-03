@@ -42,6 +42,7 @@ export class MonthlyAnalysisComponent implements OnInit {
           console.log("Error", error);
       }
       );
+      this.BarChart.update()
   }
 
   drawGraph(questionNo)
