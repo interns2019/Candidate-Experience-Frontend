@@ -1,19 +1,17 @@
-
 <div class="box">
-<img src="../../assets/tiaa.png" class="logo">
-<h1>Candidate Login</h1>
-<form>
-<p>Reference ID:</p>
-<input type="text" name="" placeholder="Enter Reference ID" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+  <img src="../../assets/tiaa.png" class="logo">
+  <h1>Candidate Login</h1>
+  <form ngNativeValidate>
+    <p>Reference ID:</p>
+    <input type="text" name="username" placeholder="Enter Reference ID" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" required>
 
-  <p>Password:</p>
-<input type="password" name="" placeholder="Enter Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+    <p>Password:</p>
+    <input type="password" name="username" placeholder="Enter Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
 
-  <button (click)="goToPage('feedback')">
-  <span>Submit</span>
-</button>
-<a routerLink="/hrlogin">Employee Login?</a>
-    </form>
+    <button (click)="goToPage('feedback')">
+      <span>Submit</span>
+    </button>
+    <a routerLink="/hrlogin">Employee Login?</a>
+  </form>
 
 </div>
-    

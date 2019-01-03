@@ -2,11 +2,11 @@
 <div class="box">
   <img src="../../assets/tiaa.png" class="logo">
   <h1>Employee Login</h1>
-  <form>
+  <form ngNativeValidate>
     <p>Employee ID:</p>
-    <input type="text" name="" placeholder="Enter Employee ID" [(ngModel)]="empId" [ngModelOptions]="{standalone: true}">
+    <input type="text" name="" placeholder="Enter Employee ID" [(ngModel)]="empId" [ngModelOptions]="{standalone: true}" required>
     <p>Password:</p>
-    <input type="password" name="" placeholder="Enter Password" [(ngModel)]="emppassword" [ngModelOptions]="{standalone: true}">
+    <input type="password" name="" placeholder="Enter Password" [(ngModel)]="emppassword" [ngModelOptions]="{standalone: true}" required>
     <button (click)="goToPage('analysis')">
       <span>Submit</span>
     </button>

@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions,Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-candidate-login',
   templateUrl: './candidate-login.component.html',
@@ -28,7 +28,7 @@ export class CandidateLoginComponent implements OnInit {
   goToPage(pageName:string){
     console.log(this.username);
     console.log(this.password);
-    
+
     this.httpClient.post(this.g.url+this.pageName,{
     username:this.username,
     password:this.password,
