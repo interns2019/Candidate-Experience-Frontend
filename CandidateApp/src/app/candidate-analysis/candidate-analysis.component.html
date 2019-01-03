@@ -40,7 +40,7 @@
     </mat-card></mat-tab>
   <mat-tab label="Update Question"><mat-card style="height:300px"><div style="position:absolute;top:90px;left:50px">
             <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Selected Question:
-            </mark>{{editQuestion}}</h4>
+            </mark>{{selectedQ}}</h4>
             <mat-form-field >
               <input matInput [(ngModel)]="question" placeholder="Update Question Here! " value="Type.." style="width:100%">
             </mat-form-field>
@@ -53,7 +53,7 @@
 
   <h4><mark style="background: rgba(0,0,0, 0.75);color: white;">Current Questions List:</mark></h4>
   <ul id= "list" class="list-group">
-    <li class="list-group-item" style="font-weight:bold;" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" (click)="selectQuestion(question.questionName)" >
+    <li class="list-group-item" style="font-weight:bold;" *ngFor="let question of questionList ; let i = index" [attr.data-index]="i" (click)="selectQuestion(i)" >
       {{question.questionNo}}:  {{question.questionName}}
     </li>
   </ul>

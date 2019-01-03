@@ -26,24 +26,30 @@ export class MonthlyAnalysisComponent implements OnInit {
   setFromYear(year)
   {
      this.fromYear = year;
+     this.reinitializeGraph()
+      if(this.fromYear === 'overall')
+      {
+        var path = 'analysis/monthly'
+      }
+      else{
+        var path = 'analysis/monthly?year='+this.fromYear
+      }
+
+      this.httpClient.get(this.g.url+path).subscribe(data => {
+        this.analysis = data
+      },
+      error => {
+          console.log("Error", error);
+      }
+      );
   }
 
   drawGraph(questionNo)
   {
     this.reinitializeGraph()
-    if(this.fromYear === 'overall')
-    {
-      var path = 'analysis/monthly'
-    }
-    else{
-      var path = 'analysis/monthly?year='+this.fromYear
-    }
-
-    this.httpClient.get(this.g.url+path).subscribe(data => {
-      
-      for(let i =1 ;i <= 12; i++)
+    for(let i =1 ;i <= 12; i++)
       {
-            this.BarChart.data.datasets[0].data.push(data[i][''+questionNo])
+            this.BarChart.data.datasets[0].data.push(this.analysis[i][''+questionNo])
             var r1 = Math.round(Math.random()*255) 
             var r2 = Math.round(Math.random()*255)
             var r3 = Math.round(Math.random()*255)
@@ -51,15 +57,16 @@ export class MonthlyAnalysisComponent implements OnInit {
             this.BarChart.data.datasets[0].borderColor.push('rgba('+r1+', '+r2+', '+r3+', 1)')
       }
       this.BarChart.update()
-    },
-    error => {
-        console.log("Error", error);
-    }
-    );
   }
 
-
   reinitializeGraph()
+  {
+    this.BarChart.data.datasets[0].data = []
+    this.BarChart.data.datasets[0].backgroundColor = []
+    this.BarChart.data.datasets[0].borderColor = []
+  }
+
+  initializeGraph()
   {
     this.BarChart=new Chart ('barchart', {
       type: 'bar',
@@ -86,7 +93,7 @@ export class MonthlyAnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
-          this.reinitializeGraph()
+          this.initializeGraph()
           this.httpClient.get(this.g.url+this.g.getQuestions).subscribe(data => {
             for(let i =0; i< data['length'];i++)
             {
