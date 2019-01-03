@@ -46,6 +46,7 @@ selectQuestion(index){
 setVisiblity(i)
 {
    this.editQuestion = i 
+   this.question = this.questionList[i].questionName
    if(this.questionList[i].visible)
    {
     this.questionList[i].visible = false
