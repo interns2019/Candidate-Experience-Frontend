@@ -31,8 +31,10 @@ export class CandidateAnalysisComponent implements OnInit {
     }
     return 0;
   }
-selectQuestion(index){
 
+
+selectQuestion(index){
+    console.log(this.questionList[index]._id)
     this.selectedQ = this.questionList[index].questionName
     this.editQuestion = index
 }
@@ -51,22 +53,24 @@ setVisiblity(i)
    else{
     this.questionList[i].visible = true
    }
-   this.updateQuestion(i)
+   this.updateQuestion()
 }
 
 
-updateQuestion(i)
+updateQuestion()
 {
   if(this.editQuestion != null)
   {
+    var i = this.editQuestion
     this.httpClient.put(this.g.url+'questions',{
-    _id : this.questionList[i]._id, 
-    questionName: this.questionList[i].questionName,
-    questionNo: this.questionList[i].questionNo,
+    id : this.questionList[i].id, 
+    questionName: this.question,
+    questionNo: i+1,
     visible: this.questionList[i].visible
   }).subscribe(
     data => {
       console.log('POST Request is successful ', data);
+      this.questionList[i].questionName = this.question
     },
     error => {
       console.log('Error', error);
@@ -113,7 +117,7 @@ updateQuestion(i)
 
         for (let i = 0; i < data["length"]; i++) {
           this.questionList.push({
-            _id: data[i]._id,
+            id: data[i].id,
             questionNo: 'Q' + (i + 1),
             questionName: data[i].questionName,
             visible: data[i].visible
